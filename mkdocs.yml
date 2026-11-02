@@ -1,0 +1,64 @@
+site_name: plotnine-genomic-tracks
+site_description: Genome-browser tracks as plotnine layers
+site_url: https://vmindel.github.io/plotnine_genomic_tracks/
+repo_url: https://github.com/vmindel/plotnine_genomic_tracks
+repo_name: vmindel/plotnine_genomic_tracks
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+nav:
+  - Home: index.md
+  - Tracks: tracks.md
+  - Stacking tracks: layout.md
+  - API reference: api.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: [docs]
+      check_paths: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: numpy
+            docstring_options:
+              warn_missing_types: false
+            show_root_heading: true
+            show_source: false
+            heading_level: 2
+            filters: ["!^_"]
+
+exclude_docs: |
+  examples/
+  gen_figures.py

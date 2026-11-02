@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plotnine-genomic-tracks"
+version = "0.1.0"
+description = "Genome-browser tracks as plotnine layers, built on pygenomic_tracks"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Vova Mindel", email = "vovamindel@gmail.com" }]
+dependencies = [
+    "plotnine>=0.15.8",
+    "pygenomic-tracks @ git+https://github.com/vmindel/pygenomic_tracks",
+    "numpy>=1.25",
+    "pandas>=2.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+docs = ["mkdocs>=1.6", "mkdocs-material>=9.5", "mkdocstrings[python]>=0.29"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
