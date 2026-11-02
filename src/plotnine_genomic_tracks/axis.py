@@ -17,6 +17,7 @@ def scale_x_genome(
     unit: str | None = None,
     name: str | bool = True,
     expand: bool = False,
+    ylim: tuple[float, float] | None = None,
 ) -> list:
     """
     Genomic x-axis for a region
@@ -38,6 +39,12 @@ def scale_x_genome(
     expand : bool
         Pad the panel beyond the region (and the y data range). Genome
         browsers do not; the default is `False`.
+    ylim : (float, float), optional
+        y-range of the panel. Give signal tracks the same ``ylim`` to make
+        them comparable. Values beyond it are cut at the panel edge, not
+        dropped. Use this rather than ``coord_cartesian(ylim=...)``, which
+        would replace the zoom to the region. Only for signal tracks: on an
+        interval or gene track it overrides the track's row layout.
 
     Returns
     -------
@@ -65,5 +72,7 @@ def scale_x_genome(
 
     return [
         scale_x_continuous(labels=labels, name=title),
-        coord_cartesian(xlim=(region.start, region.end), expand=expand),
+        coord_cartesian(
+            xlim=(region.start, region.end), ylim=ylim, expand=expand
+        ),
     ]

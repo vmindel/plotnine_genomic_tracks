@@ -102,7 +102,10 @@ layer: here a highlight across tracks.
 ![Highlighted region](img/highlight.png)
 
 `scale_x_genome` zooms with `coord_cartesian`, so data outside the region
-is kept, not dropped.
+is kept, not dropped. Adding another coord afterwards replaces that zoom.
+To fix the y-range of a signal track, for example to compare samples
+across tracks or loci, use `scale_x_genome(region, ylim=(0, 60))` on the
+signal plots only.
 
 Feature tracks set their own y scale (one row per packed level) and hide
 the y-axis; draw each feature track as its own plot rather than adding two

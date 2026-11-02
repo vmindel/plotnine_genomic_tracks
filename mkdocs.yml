@@ -29,6 +29,7 @@ nav:
   - Home: index.md
   - Tracks: tracks.md
   - Stacking tracks: layout.md
+  - Claude Code skill: claude-skill.md
   - API reference: api.md
 
 markdown_extensions:

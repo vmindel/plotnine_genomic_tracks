@@ -44,6 +44,12 @@ Needs plotnine 0.15.8 or later. Track heights in `stack_tracks` need
 plotnine's development version for now
 (`pip install git+https://github.com/has2k1/plotnine`).
 
+## Claude Code skill
+
+The package ships a skill that teaches Claude Code this API and its
+pitfalls. Install it once with `pgt-install-skills`; see the
+[docs](https://vmindel.github.io/plotnine_genomic_tracks/claude-skill/).
+
 ## Development
 
 ```bash

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import numpy as np
-from plotnine import aes, element_blank, scale_y_continuous, theme
+from plotnine import aes, scale_y_continuous
 
 if TYPE_CHECKING:
     from typing import Any
@@ -78,13 +78,9 @@ def row_limits(n_rows: int, pitch: float, height: float, labelled: bool):
 
 def feature_axis(limits) -> list:
     """
-    Scale and theme of a feature track: fixed rows, no y-axis
+    y scale of a feature track: fixed rows, no ticks or labels
+
+    Only a scale, no theme: a theme here would be replaced by any complete
+    theme (such as theme_track) added after the track.
     """
-    return [
-        scale_y_continuous(limits=limits, breaks=[], expand=(0, 0)),
-        theme(
-            axis_line_y=element_blank(),
-            axis_ticks_y=element_blank(),
-            axis_text_y=element_blank(),
-        ),
-    ]
+    return [scale_y_continuous(limits=limits, breaks=[], expand=(0, 0))]
