@@ -48,6 +48,31 @@ def test_scale_x_genome_keeps_data_outside_region():
     assert points == 2
 
 
+def test_scale_x_genome_ylim_cuts_instead_of_dropping():
+    sig = pygt.example_signal()
+    p = ggplot() + pgt.geom_signal(sig, REGION) + pgt.scale_x_genome(REGION, ylim=(0, 10))
+    fig = p.draw()
+    FigureCanvasAgg(fig).draw()
+    ax = fig.axes[0]
+    assert ax.get_ylim() == (0, 10)
+    assert ax.get_xlim() == (REGION.start, REGION.end)
+    # peaks above 10 are still drawn, cut by the panel
+    heights = [p.vertices[:, 1].max() for p in ax.collections[0].get_paths()]
+    assert max(heights) > 10
+
+
+def test_feature_track_hides_y_axis_whatever_the_theme_order():
+    layers = pgt.geom_intervals(pygt.example_peaks(), REGION)
+    for p in (
+        ggplot() + layers + pgt.theme_track(),
+        ggplot() + pgt.theme_track() + layers,
+    ):
+        p = p + pgt.scale_x_genome(REGION)
+        fig = p.draw()
+        FigureCanvasAgg(fig).draw()
+        assert len(fig.axes[0].get_yticks()) == 0
+
+
 # Signal
 
 
